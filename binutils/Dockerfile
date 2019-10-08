@@ -21,3 +21,4 @@ RUN ./binutils-gdb/binutils/nm-new -A -a -l -S -s --special-syms --synthetic --w
 RUN gdb ./binutils-gdb/binutils/nm-new -ex 'r -A -a -l -S -s --special-syms --synthetic --with-symbol-versions -D poc3_malloc-memory-corruption_print_symbol' -ex bt -ex quit
 RUN gdb ./binutils-gdb/binutils/nm-new -ex 'r -A -a -l -S -s --special-syms --synthetic --with-symbol-versions -D poc4_invalid-free__bfd_dwarf2_cleanup_debug_info' -ex bt -ex quit
 RUN ./binutils-gdb/binutils/nm-new -A -a -l -S -s --special-syms --synthetic --with-symbol-versions -D poc5_invalid-free__bfd_dwarf2_cleanup_debug_info || exit 0
+RUN ./binutils-gdb/binutils/nm-new -A -a -l -S -s --special-syms --synthetic --with-symbol-versions -D poc6_stack-overflow_find_abstract_instance || exit 0
