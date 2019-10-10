@@ -12,6 +12,9 @@ RUN apt update &&\
     cd _build &&\
     AFL_USE_ASAN=1 ASAN_OPTIONS="detect_leaks=0" ninja
 
-RUN wget https://gitlab.gnome.org/GNOME/gdk-pixbuf/uploads/a68dee3aaf8b80634f0b10d3f536e714/poc1.zip &&\
-    unzip poc1.zip &&\
-    /gdk-pixbuf/_build/gdk-pixbuf/gdk-pixbuf-pixdata poc1 /dev/null || exit 0
+ADD . /
+
+RUN ./gdk-pixbuf/_build/gdk-pixbuf/gdk-pixbuf-pixdata poc1_memset-negative-size-param_gdk_pixbuf_gif_anim_iter_get_pixbuf /dev/null || exit 0
+RUN ./gdk-pixbuf/_build/gdk-pixbuf/gdk-pixbuf-pixdata poc2_heap-use-after-free_OneLine8 /dev/null || exit 0
+RUN ./gdk-pixbuf/_build/gdk-pixbuf/gdk-pixbuf-pixdata poc3_heap-buffer-overflow_OneLine8 /dev/null || exit 0
+RUN ./gdk-pixbuf/_build/gdk-pixbuf/gdk-pixbuf-pixdata poc4_heap-buffer-overflow_OneLine4 /dev/null || exit 0
