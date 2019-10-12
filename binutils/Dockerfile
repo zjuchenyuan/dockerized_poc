@@ -1,6 +1,6 @@
 FROM zjuchenyuan/afl
 ENV AFL_USE_ASAN=1
-RUN git clone git://sourceware.org/git/binutils-gdb.git --depth 50 &&\
+RUN git clone git://sourceware.org/git/binutils-gdb.git &&\
     cd binutils-gdb &&\
     git checkout 816228ed09dc867fa16dc5458277d649885d98fe &&\
     ./configure --disable-shared &&\
