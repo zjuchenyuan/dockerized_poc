@@ -16,3 +16,19 @@ RUN /tmp/infotocap fuzzpoc/infotocap_poc4 || exit 0
 RUN /tmp/infotocap fuzzpoc/infotocap_poc5 || exit 0
 RUN /tmp/infotocap fuzzpoc/infotocap_poc6 || exit 0
 RUN /tmp/infotocap fuzzpoc/infotocap_poc7 || exit 0
+
+RUN apt install -y valgrind &&\
+    cd ncurses-snapshots &&\
+    make clean &&\
+    unset AFL_USE_ASAN &&\
+    make -j &&\
+    mkdir /tmp/noasan &&\
+    cp ./progs/tic /tmp/noasan/infotocap
+
+RUN valgrind -v /tmp/noasan/infotocap fuzzpoc/infotocap_poc1 || exit 0
+RUN valgrind -v /tmp/noasan/infotocap fuzzpoc/infotocap_poc2 || exit 0
+RUN valgrind -v /tmp/noasan/infotocap fuzzpoc/infotocap_poc3 || exit 0
+RUN valgrind -v /tmp/noasan/infotocap fuzzpoc/infotocap_poc4 || exit 0
+RUN valgrind -v /tmp/noasan/infotocap fuzzpoc/infotocap_poc5 || exit 0
+RUN valgrind -v /tmp/noasan/infotocap fuzzpoc/infotocap_poc6 || exit 0
+RUN valgrind -v /tmp/noasan/infotocap fuzzpoc/infotocap_poc7 || exit 0
