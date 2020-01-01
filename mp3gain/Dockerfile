@@ -13,3 +13,5 @@ RUN /tmp/asan/mp3gain /fuzzpoc/mp3gain_poc1 || exit 0
 RUN valgrind -v /tmp/justafl/mp3gain /fuzzpoc/mp3gain_poc1 || exit 0
 RUN /tmp/asan/mp3gain /fuzzpoc/mp3gain_poc2 || exit 0
 RUN valgrind -v /tmp/justafl/mp3gain /fuzzpoc/mp3gain_poc2 || exit 0
+RUN /tmp/asan/mp3gain /fuzzpoc/mp3gain_poc5 || exit 0
+RUN valgrind -v /tmp/justafl/mp3gain /fuzzpoc/mp3gain_poc5 || exit 0

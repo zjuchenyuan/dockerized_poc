@@ -1,0 +1,13 @@
+FROM zjuchenyuan/afl
+ENV AFL_USE_ASAN=1
+RUN git clone git://sourceware.org/git/binutils-gdb.git &&\
+    cd binutils-gdb &&\
+    ./configure --disable-shared &&\
+    for i in bfd libiberty opcodes libctf; do cd $i; ./configure --disable-shared && make -j; cd ..; done  &&\
+    cd binutils  &&\
+    ./configure --disable-shared &&\
+    make objdump nm-new size readelf cxxfilt
+
+RUN apt install -y gdb &&\
+    echo -e "set pagination off\nset confirm off" > /root/.gdbinit
+
