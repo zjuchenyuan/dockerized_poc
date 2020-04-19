@@ -9,9 +9,11 @@ RUN git clone https://git.code.sf.net/p/mp3gain/code mp3gain-code &&\
 RUN git clone https://github.com/zjuchenyuan/fuzzpoc &&\
     apt install -y gdb valgrind
 
-RUN /tmp/asan/mp3gain /fuzzpoc/mp3gain_poc1 || exit 0
-RUN valgrind -v /tmp/justafl/mp3gain /fuzzpoc/mp3gain_poc1 || exit 0
-RUN /tmp/asan/mp3gain /fuzzpoc/mp3gain_poc2 || exit 0
-RUN valgrind -v /tmp/justafl/mp3gain /fuzzpoc/mp3gain_poc2 || exit 0
-RUN /tmp/asan/mp3gain /fuzzpoc/mp3gain_poc5 || exit 0
-RUN valgrind -v /tmp/justafl/mp3gain /fuzzpoc/mp3gain_poc5 || exit 0
+RUN cp /fuzzpoc/mp3gain_poc1 /tmp/poc && /tmp/asan/mp3gain /tmp/poc || exit 0
+RUN cp /fuzzpoc/mp3gain_poc1 /tmp/poc && valgrind -v /tmp/justafl/mp3gain /tmp/poc || exit 0
+RUN cp /fuzzpoc/mp3gain_poc2 /tmp/poc && /tmp/asan/mp3gain /tmp/poc || exit 0
+RUN cp /fuzzpoc/mp3gain_poc2 /tmp/poc && valgrind -v /tmp/justafl/mp3gain /tmp/poc || exit 0
+RUN cp /fuzzpoc/mp3gain_CVE-2018-10777 /tmp/poc && /tmp/asan/mp3gain /tmp/poc || exit 0
+RUN cp /fuzzpoc/mp3gain_CVE-2018-10777 /tmp/poc && valgrind -v /tmp/justafl/mp3gain /tmp/poc || exit 0
+RUN cp /fuzzpoc/mp3gain_poc5 /tmp/poc && /tmp/asan/mp3gain /tmp/poc || exit 0
+RUN cp /fuzzpoc/mp3gain_poc5 /tmp/poc && valgrind -v /tmp/justafl/mp3gain /tmp/poc || exit 0
